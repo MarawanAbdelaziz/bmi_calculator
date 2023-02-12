@@ -28,31 +28,34 @@ class BmiResultScreen extends StatelessWidget {
         centerTitle: true,
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Gender : ${isMale ? 'Male' : 'Female'} ',
-              style: TextStyle(
-                fontSize: 25.0,
-                fontWeight: FontWeight.bold,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Image(image: AssetImage('assets/images/BMI1.jpg')),
+              Text(
+                'Gender : ${isMale ? 'Male' : 'Female'} ',
+                style: TextStyle(
+                  fontSize: 25.0,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            Text(
-              'Result : ${result.round()} ',
-              style: TextStyle(
-                fontSize: 25.0,
-                fontWeight: FontWeight.bold,
+              Text(
+                'Result : ${result.round()} ',
+                style: TextStyle(
+                  fontSize: 25.0,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            Text(
-              'Age : $age ',
-              style: TextStyle(
-                fontSize: 25.0,
-                fontWeight: FontWeight.bold,
+              Text(
+                'Age : $age ',
+                style: TextStyle(
+                  fontSize: 25.0,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-          ],
+              Image(image: AssetImage('assets/images/BMI2.jpg')),
+            ],
+          ),
         ),
       ),
     );
