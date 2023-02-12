@@ -1,19 +1,25 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_print
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_print, non_constant_identifier_names
 // ignore_for_file: use_key_in_widget_constructors
 
+import 'dart:math';
+
+import 'package:bmi_calculator/bmi_result_screen.dart';
 import 'package:flutter/material.dart';
 
-class BmiCalculator extends StatefulWidget {
+class BmiScreen extends StatefulWidget {
   @override
-  State<BmiCalculator> createState() => _BmiCalculatorState();
+  State<BmiScreen> createState() => _BmiScreen();
 }
 
-class _BmiCalculatorState extends State<BmiCalculator> {
+class _BmiScreen extends State<BmiScreen> {
   bool isMale = true;
-  double heghit = 120;
-  int weight = 40;
+  double height = 120;
+  int weight = 81;
   int age = 20;
-
+  
+  String Gender = "Male" ;
+ 
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -135,7 +141,7 @@ class _BmiCalculatorState extends State<BmiCalculator> {
                       textBaseline: TextBaseline.alphabetic,
                       children: [
                         Text(
-                          '${heghit.round()}',
+                          '${height.round()}',
                           style: TextStyle(
                             fontWeight: FontWeight.w900,
                             fontSize: 40.0,
@@ -157,12 +163,12 @@ class _BmiCalculatorState extends State<BmiCalculator> {
                       thumbColor: Colors.white,
                       activeColor: Colors.red,
                       inactiveColor: Colors.black,
-                      value: heghit,
+                      value: height,
                       max: 220.0,
                       min: 80,
                       onChanged: (value) {
                         setState(() {
-                          heghit = value;
+                          height = value;
                         });
                       },
                     )
@@ -209,6 +215,7 @@ class _BmiCalculatorState extends State<BmiCalculator> {
                                     weight--;
                                   });
                                 },
+                                heroTag: 'weight-',
                                 mini: true,
                                 child: Icon(Icons.remove),
                               ),
@@ -218,6 +225,7 @@ class _BmiCalculatorState extends State<BmiCalculator> {
                                     weight++;
                                   });
                                 },
+                                heroTag: 'weight+',
                                 mini: true,
                                 child: Icon(Icons.add),
                               )
@@ -262,6 +270,7 @@ class _BmiCalculatorState extends State<BmiCalculator> {
                                     age--;
                                   });
                                 },
+                                heroTag: 'age-',
                                 mini: true,
                                 child: Icon(Icons.remove),
                               ),
@@ -271,6 +280,7 @@ class _BmiCalculatorState extends State<BmiCalculator> {
                                     age++;
                                   });
                                 },
+                                heroTag: 'age+',
                                 mini: true,
                                 child: Icon(Icons.add),
                               )
@@ -288,7 +298,20 @@ class _BmiCalculatorState extends State<BmiCalculator> {
             color: Colors.red,
             width: double.infinity,
             child: MaterialButton(
-              onPressed: () {},
+              onPressed: () {
+                double result = weight / pow(height / 100, 2);
+                print(result.round());
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => BmiResultScreen(
+                      age: age,
+                      isMale: isMale,
+                      result: result,
+                    ),
+                  ),
+                );
+              },
               height: 50.0,
               child: Text(
                 'CALCULATE',
@@ -304,8 +327,4 @@ class _BmiCalculatorState extends State<BmiCalculator> {
       ),
     );
   }
-
-// var result = weight / pow(height / 100, 2);
-// print (result.round());
-
 }
